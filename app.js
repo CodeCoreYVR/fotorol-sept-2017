@@ -4,6 +4,10 @@ const morgan = require('morgan')
 // to create a web application by calling it.
 // 👇 creates an instance of a Express web app server.
 const app = Express()
+// 👇 configures our Express application to use the `ejs` templating
+// language to render our views. For this to work, you must have the `ejs`
+// package installed.
+app.set('view engine', 'ejs')
 
 // morgan is a package for creating middleware functions that log
 // information about your app's requests and responses.
@@ -29,6 +33,15 @@ app.use((request, response, next) => {
 */
 
 app.get('/', (request, response) => {
+
+  // response.render will render template a file from the `/views`
+  // directory as the content the response to the client.
+  // Specify file by it path skipping `/views` and disregarding
+  // its extension.
+  response.render('index')
+})
+
+app.get('/hello-world', (request, response) => {
   // The `request` object represents what the client is
   // asking of the server.
   // The `response` object represents the reply that our
