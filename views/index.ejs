@@ -2,4 +2,22 @@
 
 <h1>Welcome Home!</h1>
 
+<form action='/' method='POST'>
+  <div>
+    <textarea
+      cols='60'
+      rows='5'
+      name='content'
+      placeholder="What's on your mind?"
+    ></textarea>
+  </div>
+  <input type='submit' value='Submit'/>
+</form>
+
+<% if (content) { %>
+  <h2>You were thinking:</h2>
+  <!-- 👇 that tag with the = escapes all the html characters inside -->
+  <p><%= content %></p>
+<% } %>
+
 <%- include('./partials/footer') %>
