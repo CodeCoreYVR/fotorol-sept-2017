@@ -4,7 +4,8 @@
   "description": "An Exchange-A-Gram clone",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "debug": "nodemon --inspect"
   },
   "repository": {
     "type": "git",
