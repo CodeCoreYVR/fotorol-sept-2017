@@ -10,7 +10,7 @@ app.get('/', (request, response) => {
   // The `response` object represents the reply that our
   // server is going to send to the client.
 
-  response.send(`Hello, World!`)
+  response.send(`Hello, Class!`)
 })
 
 const PORT = 4545;

@@ -4,7 +4,7 @@
   "description": "An Exchange-A-Gram clone",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
   "homepage": "https://github.com/CodeCoreYVR/fotorol-sept-2017#readme",
   "dependencies": {
     "express": "^4.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
