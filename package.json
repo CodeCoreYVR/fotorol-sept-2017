@@ -1,0 +1,25 @@
+{
+  "name": "fotorol",
+  "version": "0.0.0",
+  "description": "An Exchange-A-Gram clone",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeCoreYVR/fotorol-sept-2017.git"
+  },
+  "keywords": [
+    "exchange-a-gram",
+    "instagram",
+    "app",
+    "express"
+  ],
+  "author": "Steve Godin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeCoreYVR/fotorol-sept-2017/issues"
+  },
+  "homepage": "https://github.com/CodeCoreYVR/fotorol-sept-2017#readme"
+}
