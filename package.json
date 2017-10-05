@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon",
-    "debug": "nodemon --inspect"
+    "debug": "nodemon --inspect",
+    "db:create": "createdb --echo fotorol_dev",
+    "db:drop": "dropdb --echo --if-exists fotorol_dev"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,9 @@
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.1",
-    "morgan": "^1.9.0"
+    "knex": "^0.13.0",
+    "morgan": "^1.9.0",
+    "pg": "^7.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
