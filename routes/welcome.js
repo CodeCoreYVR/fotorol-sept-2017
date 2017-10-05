@@ -45,7 +45,11 @@ router.post('/', (request, response) => {
   kx
     .insert({content: content})
     .into('posts')
-    .then(console.log)
+    .then(() => response.redirect('/'))
+  // We must response.redirect inside then's callback otherwise
+  // the user's page might be rendered before our database was updated
+  // with the new post meaning that user will not see the new post until
+  // they manually reload the page.
 
   // response.render can take a second argument. It's an object where
   // all of its properties will be available as local variables inside of
@@ -55,7 +59,7 @@ router.post('/', (request, response) => {
   // response.redirect will respond to the client with status code 302.
   // Indicating that it should make a GET request the given URL as argument.
   // `/` in this case.
-  response.redirect('/')
+  // response.redirect('/')
 })
 
 router.get('/about', (request, response) => {
