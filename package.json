@@ -7,7 +7,8 @@
     "start": "nodemon",
     "debug": "nodemon --inspect",
     "db:create": "createdb --echo fotorol_dev",
-    "db:drop": "dropdb --echo --if-exists fotorol_dev"
+    "db:drop": "dropdb --echo --if-exists fotorol_dev",
+    "db:migrate": "node db/migration.js"
   },
   "repository": {
     "type": "git",
