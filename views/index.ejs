@@ -1,18 +1,30 @@
 <%- include('./partials/header') %>
 
-<h1>Welcome Home!</h1>
+<div class="container-fluid">
 
-<form action='/' method='POST'>
-  <div>
-    <textarea
-      cols='60'
-      rows='5'
-      name='content'
-      placeholder="What's on your mind?"
-    ></textarea>
-  </div>
-  <input type='submit' value='Submit'/>
-</form>
+  <section class="row justify-content-center">
+
+    <div class="col-sm-8">
+      <form class="d-flex flex-column" action='/' method='POST'>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            rows='5'
+            name='content'
+            placeholder="What's on your mind?"
+          ></textarea>
+        </div>
+        <input
+          class="btn btn-outline-primary align-self-end"
+          type='submit'
+          value='Submit'
+        />
+      </form>
+    </div>
+
+  </section>
+
+</div>
 
 <% if (content) { %>
   <h2>You were thinking:</h2>
