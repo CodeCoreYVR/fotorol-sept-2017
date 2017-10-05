@@ -1,4 +1,5 @@
 const Express = require('express')
+const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 // The Express is returned as function and we can use
@@ -10,6 +11,20 @@ const app = Express()
 // package installed.
 app.set('view engine', 'ejs')
 
+// To serve images, css, javascript, sounds & videos to a client of your
+// serve you must make them available with the Express.static middleware.
+// This will URLs for all files inside a given directory.
+// (e.g.
+// For a file public/css/index.css, the url would be http://localhost:4545/css/index.css
+// For a file public/index.js, the url would be http://localhost:4545/index.js
+// )
+
+// __dirname is a global variable in node that returns the full path
+// to the file where it is written.
+
+// `path.join` is a method that joins a bunch strings together into
+// a path (e.g. path.join('project', 'fotorol', 'public') // project/fotorol/public )
+app.use(Express.static(path.join(__dirname, 'public')))
 // morgan is a package for creating middleware functions that log
 // information about your app's requests and responses.
 app.use(bodyParser.urlencoded({extended: false}))
