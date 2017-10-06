@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 // 🛣 ROUTES
 const welcome = require('./routes/welcome')
+const posts = require('./routes/posts')
 
 // The Express is returned as function and we can use
 // to create a web application by calling it.
@@ -54,6 +55,7 @@ app.use((request, response, next) => {
 */
 
 app.use('/', welcome)
+app.use('/posts', posts)
 
 const PORT = 4545;
 app.listen(
