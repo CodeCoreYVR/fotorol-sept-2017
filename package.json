@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon",
-    "debug": "nodemon --inspect",
+    "debug": "nodemon --inspect=9229",
+    "repl": "nodemon --inspect=9222 repl.js",
     "db:create": "createdb --echo fotorol_dev",
     "db:drop": "dropdb --echo --if-exists fotorol_dev",
     "db:migrate": "node db/migration.js"
