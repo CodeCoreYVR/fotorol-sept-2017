@@ -5,4 +5,9 @@ const kx = require('knex')({
   }
 })
 
+kx.on('query', query => {
+  console.log(query.sql)
+  console.log(query.bindings)
+})
+
 module.exports = kx
