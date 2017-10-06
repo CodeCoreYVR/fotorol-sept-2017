@@ -21,7 +21,7 @@ router.get('/', (request, response) => {
     .select()
     .from('posts')
     .then(posts => {
-      response.render('index', {content: null, posts})
+      response.render('index', {posts})
     })
 
   // response.render will render template a file from the `/views`
@@ -56,9 +56,12 @@ router.post('/', upload.single('photo'), (request, response) => {
   // input fields in the submitted form. We have `textarea` with the `name`
   // `content` which makes available on `request.body`.
   const {content} = request.body;
+  const {filename} = request.file;
 
+  // We do not save files to our DB. We instead save the relative URL
+  // to the file in the database.
   kx
-    .insert({content: content})
+    .insert({content: content, photo_path: `/uploads/${filename}` })
     .into('posts')
     .then(() => response.redirect('/'))
   // We must response.redirect inside then's callback otherwise
