@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+
+<div class="container-fluid">
+
+  <section class="fotorol-list row justify-content-center">
+    
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header">
+            <strong><%= post.username %></strong>
+          </div>
+          <a href="/posts/<%= post.id %>">
+            <img class="card-img" src="<%= post.photo_path %>">
+          </a>
+          <div class="card-body">
+            <p class="card-text">
+              <%= post.content %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+</div>
+
+<%- include('../partials/footer') %>

@@ -50,7 +50,9 @@
           <div class="card-header">
             <strong><%= post.username %></strong>
           </div>
-          <img class="card-img" src="<%= post.photo_path %>">
+          <a href="/posts/<%= post.id %>">
+            <img class="card-img" src="<%= post.photo_path %>">
+          </a>
           <div class="card-body">
             <p class="card-text">
               <%= post.content %>

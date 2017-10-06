@@ -6,6 +6,30 @@ const kx = require('../db/connection')
 
 const upload = multer({dest: path.join(__dirname, '..', 'public', 'uploads')})
 
+// READ -> SHOW URL: /posts/:id METHOD: GET
+router.get('/:id', (request, response) => {
+  // To look at data coming from a form or the url params or to debug,
+  // a useful trick to send the object as a response with `response.send`
+  // response.send(request.params)
+
+  // When declaring a route with a word of the url that is prefixed with `:`,
+  // that part of the url will be available as a property in the `request.params`
+  // object.
+  // `/:id` -> URL: /bob -> request.params.id === 'bob' // true
+  // `/:name/:email` -> URL: /tim/t@gmail.com ->
+  //    request.params.name === 'tim'
+  //    request.params.email === 't@gmail.com'
+  const {id} = request.params
+
+  kx
+    .first()
+    .from('posts')
+    .where({id}) // <-- syntax sugar for {id: id}
+    .then(post => {
+      response.render('posts/show', {post})
+    })
+})
+
 // READ -> INDEX URL: /posts/ METHOD: GET
 router.get('/', (request, response) => {
   // Form data is available as an object on the property `request.body`
