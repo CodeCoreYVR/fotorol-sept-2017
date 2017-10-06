@@ -55,13 +55,13 @@ router.post('/', upload.single('photo'), (request, response) => {
   // request.body's properties will be all the name attributes of the
   // input fields in the submitted form. We have `textarea` with the `name`
   // `content` which makes available on `request.body`.
-  const {content} = request.body;
+  const {content, username} = request.body;
   const {filename} = request.file;
 
   // We do not save files to our DB. We instead save the relative URL
   // to the file in the database.
   kx
-    .insert({content: content, photo_path: `/uploads/${filename}` })
+    .insert({content: content, username: username, photo_path: `/uploads/${filename}` })
     .into('posts')
     .then(() => response.redirect('/'))
   // We must response.redirect inside then's callback otherwise
