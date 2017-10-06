@@ -1,9 +1,12 @@
 const Express = require('express')
+const multer = require('multer')
+const path = require('path')
 const router = Express.Router()
 const kx = require('../db/connection')
 
-router.get('/', (request, response) => {
+const upload = multer({dest: path.join(__dirname, '..', 'public', 'uploads')})
 
+router.get('/', (request, response) => {
   // Form data is available as an object on the property `request.body`
   // if you've setup `body-parser` middleware.
   console.log(request.body)
@@ -28,11 +31,23 @@ router.get('/', (request, response) => {
   // response.render('index', {content: null})
 })
 
-router.post('/', (request, response) => {
+/*
+To upload files with a form, you must give the html attribute:
+`enctype="multipart/form-data"`.
+
+<input
+  class="form-control"
+  name="photo" <-- "photo" is the argument to upload.single("photo")
+  type="file"
+/>
+*/
+
+
+// When using multer with the `.single`, only one file is allowed to be
+// sent and it must share the same name as the argument.
+router.post('/', upload.single('photo'), (request, response) => {
   // Form data is available as an object on the property `request.body`
   // if you've setup `body-parser` middleware.
-  console.log(request.body)
-
   const {body} = request;
   // 👆 syntax sugar for 👇
   // const body = request.body;
