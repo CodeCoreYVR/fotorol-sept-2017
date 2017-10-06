@@ -21,6 +21,7 @@ router.get('/', (request, response) => {
   kx
     .select()
     .from('posts')
+    .orderBy('created_at', 'DESC')
     .then(posts => {
       response.render('posts/index', {posts})
     })
