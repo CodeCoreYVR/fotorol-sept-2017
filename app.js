@@ -4,8 +4,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
 // 🛣 ROUTES
-const welcome = require('./routes/welcome')
-const posts = require('./routes/posts')
+const root = require('./routes')
 
 // The Express is returned as function and we can use
 // to create a web application by calling it.
@@ -53,9 +52,7 @@ app.use((request, response, next) => {
   next();
 })
 */
-
-app.use('/', welcome)
-app.use('/posts', posts)
+app.use(root)
 
 const PORT = 4545;
 app.listen(
