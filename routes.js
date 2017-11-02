@@ -18,7 +18,14 @@ root.use('/posts', posts)
 posts.get('/', PostsController.index)
 posts.post('/', upload.single('photo'), PostsController.create)
 posts.get('/:id', PostsController.show)
+posts.get('/:id/edit', PostsController.edit)
 posts.delete('/:id', PostsController.destroy)
-
+posts.patch('/:id', upload.single('photo'), PostsController.update)
 
 module.exports = root
+
+
+
+
+
+// bump
