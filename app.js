@@ -3,8 +3,11 @@ const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
+const KnexSessionStore = require('connect-session-knex')(session)
+const knex = require('./db/connection')
 
-// 🛣 ROUTES
+// 🛣  ROUTES
 const root = require('./routes')
 
 // The Express is returned as function and we can use
@@ -42,6 +45,16 @@ app.use(morgan('dev'))
 // POST to http://localhost:3000/posts?_method=DELETE
 // 👆 The POST will be overriden with the DELETE method.
 app.use(methodOverride('_method'))
+app.use(session({
+  name: '_fotorol',
+  secret: 'supersecret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // A day (in milliseconds)
+  },
+  store: new KnexSessionStore({knex}), // defaults to a sqlite3 database
+  resave: false,
+  saveUninitialized: false
+}));
 // Middleware functions are called in order of appearance in the
 // code. This one happens before our hello world below.
 /*
@@ -55,7 +68,7 @@ app.use((request, response, next) => {
   const message = `${method} ${path} at ${new Date()}`
   console.log(message);
 
-  // next is function given to middleware callbacks as an argument.
+  // next is function given to middleware callbacks as an argument.
   // It is always the third argument. When called, Express will move
   // on the next middleware in line.
   next();
