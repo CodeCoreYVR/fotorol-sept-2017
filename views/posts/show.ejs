@@ -20,9 +20,36 @@
             <p class="card-text">
               <%= post.content %>
             </p>
+
+            <ul class="list-unstyled">
+              <% for (let comment of comments) { %>
+                <li class="media">
+                  <div class="media-body">
+                    <%= comment.content %>
+                  </div>
+                </li>
+              <% } %>
+            </ul>
+
+            <form action="/posts/<%= post.id %>/comments" method="POST">
+              <div class="form-group">
+                <textarea
+                class="form-control"
+                rows="3"
+                name="content"
+                placeholder="Add a comment..."
+                ></textarea>
+              </div>
+              <input
+              class="btn btn-outline-primary align-self-end"
+              type="submit"
+              value="Submit"
+              >
+            </form>
           </div>
         </div>
       </div>
+
 
   </section>
 

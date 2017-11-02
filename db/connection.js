@@ -1,13 +1,10 @@
-const kx = require('knex')({
-  client: 'pg',
-  connection: {
-    database: 'fotorol_dev'
-  }
-})
+// ENV['RAILS_ENV']
+// process.env.NODE_ENV
+const knexConfig = require('../knexfile')[process.env.NODE_ENV || 'development']
+const kx = require('knex')(knexConfig)
 
 kx.on('query', query => {
-  console.log(query.sql)
-  console.log(query.bindings)
+  console.log(query.sql, query.bindings)
 })
 
 module.exports = kx

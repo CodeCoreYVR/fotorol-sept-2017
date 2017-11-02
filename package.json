@@ -9,7 +9,7 @@
     "repl": "nodemon --inspect=9222 repl.js",
     "db:create": "createdb --echo fotorol_dev",
     "db:drop": "dropdb --echo --if-exists fotorol_dev",
-    "db:migrate": "node db/migration.js"
+    "db:migrate": "knex migrate:latest"
   },
   "repository": {
     "type": "git",

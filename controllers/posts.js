@@ -8,14 +8,46 @@ const PostsController = {
       .orderBy('created_at', 'DESC')
       .then(posts => res.render('posts/index', {posts}))
   },
+  /*
   show (req, res, next) {
     const {id} = req.params
 
-    kx
-      .first()
-      .from('posts')
-      .where({id}) // <-- syntax sugar for {id: id}
-      .then(post => res.render('posts/show', {post}))
+    Promise.all([
+      kx
+        .first()
+        .from('posts')
+        .where({id}),
+      kx
+        .select()
+        .from('comments')
+        .where({postId: id})
+        .orderBy('created_at', 'DESC')
+    ])
+      .then(([post, comments]) => res.render('posts/show', {post, comments}))
+      .catch(error => next(error))
+  },
+  */
+  // NEW KEYWORD `async`
+  // You can putting `async` in front methods, functions and arrow functions.
+  // This will make that function treat promises differently. The keyword
+  // `await` will become available which allows you to tell the program
+  // to wait for a promise to resolve getting its promiseValue instead of
+  // the promise itself.
+
+  // `async` functions always return a promise where the return value is promise
+  // value.
+  async show (req, res, next) {
+    const {id} = req.params
+
+    try {
+      const post = await kx.first().from('posts').where({id})
+      const comments = await kx
+        .select().from('comments').where({postId: id}).orderBy('created_at', 'DESC')
+
+      res.render('posts/show', {post, comments})
+    } catch (error) {
+      next(error)
+    }
   },
   create (req, res, next) {
     const {content, username} = req.body;
