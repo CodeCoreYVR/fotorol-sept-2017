@@ -18,6 +18,7 @@ root.use('/posts', posts)
 posts.get('/', PostsController.index)
 posts.post('/', upload.single('photo'), PostsController.create)
 posts.get('/:id', PostsController.show)
+posts.delete('/:id', PostsController.destroy)
 
 
 module.exports = root

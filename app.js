@@ -2,6 +2,7 @@ const Express = require('express')
 const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 // 🛣 ROUTES
 const root = require('./routes')
@@ -33,6 +34,14 @@ app.use(Express.static(path.join(__dirname, 'public')))
 // information about your app's requests and responses.
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(morgan('dev'))
+// 👇 We're using methodOverride middleware in its simplest form.
+// It will look for a query in the URL with key `_method` as written below.
+// If the value for that key is a valid HTTP verb and the request is being
+// as a POST, then that verb will be used replace POST.
+// Example:
+// POST to http://localhost:3000/posts?_method=DELETE
+// 👆 The POST will be overriden with the DELETE method.
+app.use(methodOverride('_method'))
 // Middleware functions are called in order of appearance in the
 // code. This one happens before our hello world below.
 /*

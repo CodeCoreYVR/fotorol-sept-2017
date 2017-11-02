@@ -3,11 +3,14 @@
 <div class="container-fluid">
 
   <section class="fotorol-list row justify-content-center">
-    
+
       <div class="col-sm-8">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header d-flex">
             <strong><%= post.username %></strong>
+            <form class="ml-auto" action="/posts/<%= post.id %>?_method=DELETE" method="POST">
+              <input type="submit" value="Delete">
+            </form>
           </div>
           <a href="/posts/<%= post.id %>">
             <img class="card-img" src="<%= post.photo_path %>">

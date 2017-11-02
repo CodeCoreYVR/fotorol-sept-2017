@@ -25,7 +25,23 @@ const PostsController = {
       .insert({content: content, username: username, photo_path: `/uploads/${filename}` })
       .into('posts')
       .then(() => res.redirect('/posts'))
+  },
+  destroy (req, res, next) {
+    const {id} = req.params
+
+    kx
+      .delete()
+      .from('posts')
+      .where({id})
+      .then(() => res.redirect('/posts'))
+      .catch(error => next(error))
   }
 }
 
 module.exports = PostsController
+
+
+
+
+
+// bump
