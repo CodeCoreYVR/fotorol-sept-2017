@@ -3,6 +3,7 @@ const {Router} = require('express')
 const PostsController = require('./controllers/posts')
 const CommentsController = require('./controllers/comments')
 const UsersController = require('./controllers/users')
+const SessionsController = require('./controllers/sessions')
 const multer = require('multer')
 
 const upload = multer({dest: path.join(__dirname, 'public', 'uploads')})
@@ -12,6 +13,7 @@ const root = Router()
 const posts = Router()
 const comments = Router({mergeParams: true})
 const users = Router()
+const session = Router()
 // When nesting routers, the URL params of the parent
 // are lost by default. To keep them, specify it with
 // the option {mergeParams: true}
@@ -37,6 +39,12 @@ comments.post('/', CommentsController.create)
 root.use('/users', users)
 users.get('/new', UsersController.new)
 users.post('/', UsersController.create)
+
+// Session Routes
+root.use('/session', session)
+session.get('/new', SessionsController.new)
+session.post('/', SessionsController.create)
+session.delete('/', SessionsController.destroy)
 
 module.exports = root
 
