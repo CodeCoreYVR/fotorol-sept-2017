@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('flash')
+const kx = require('./db/connection')
 
 // 🛣 ROUTES
 const root = require('./routes')
@@ -56,6 +57,25 @@ app.use(session({
 app.use(flash()) // 👈 Must be add after session middleware (requires it to function)
 // Middleware functions are called in order of appearance in the
 // code. This one happens before our hello world below.
+app.use(async function setCurrentUser (req, res, next) {
+  const {userId} = req.session
+  // yo
+  let user
+  req.currentUser = false
+  res.locals.currentUser = false // 👈 The `res.locals` object's properties are
+  // available as variables in ALL VIEWS in the application. This how we're
+  // going to set a `currentUser` that is usable anywhere in our views.
+
+  if (userId) {
+    user = await kx.first().from('users').where({id: userId})
+    req.currentUser = user
+    res.locals.currentUser = user
+  }
+
+  next()
+})
+
+
 /*
 app.use((request, response, next) => {
   const {method, path} = request;
