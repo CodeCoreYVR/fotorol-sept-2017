@@ -53,10 +53,20 @@ const PostsController = {
     const {content, username} = req.body;
     const {filename} = req.file;
 
+
     kx
       .insert({content: content, username: username, photo_path: `/uploads/${filename}` })
       .into('posts')
-      .then(() => res.redirect('/posts'))
+      .then(() => {
+        // When setting the type of flash message, try using alert types
+        // that are available in Boostrap because we've connected together.
+        // Each type will display in a different color
+        req.flash('success', 'Post Created!')
+        // req.flash('warning', 'Don\'t go there')
+        // req.flash('danger', 'Danger! Danger, Will Robinson!')
+
+        res.redirect('/posts')
+      })
   },
   destroy (req, res, next) {
     const {id} = req.params

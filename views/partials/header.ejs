@@ -27,3 +27,24 @@
         </ul>
       </div>
     </nav>
+
+    <div class="container-fluid">
+      <% let message; while (message = flash.shift()) { %>
+        <div class="alert alert-<%= message.type %> alert-dismissible fade show">
+          <%= message.message %>
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% } %>
+
+
+
+
+
+
+
+
+
+
+    <!-- bump -->

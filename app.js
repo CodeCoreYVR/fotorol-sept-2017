@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const flash = require('flash')
 
 // 🛣 ROUTES
 const root = require('./routes')
@@ -52,6 +53,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }))
+app.use(flash()) // 👈 Must be add after session middleware (requires it to function)
 // Middleware functions are called in order of appearance in the
 // code. This one happens before our hello world below.
 /*
