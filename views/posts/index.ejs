@@ -1,6 +1,7 @@
 <%- include('../partials/header') %>
 <section class="fotorol-list row justify-content-center">
 
+  <% if (currentUser) { %>
   <div class="col-sm-8">
     <form
       class="d-flex flex-column"
@@ -40,6 +41,7 @@
       />
     </form>
   </div>
+  <% } %>
 
   <% for (let post of posts) { %>
     <div class="col-sm-8">

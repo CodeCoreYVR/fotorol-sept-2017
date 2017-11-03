@@ -18,6 +18,15 @@ const session = Router()
 // are lost by default. To keep them, specify it with
 // the option {mergeParams: true}
 
+function authenticate (req, res, next) {
+  if (!req.currentUser) {
+    res.flash('warning', 'Please Sign In first!')
+    res.redirect(`/session/new`)
+  } else {
+    next()
+  }
+}
+
 // Root Routes (a.k.a. Base Routes)
 root.get('/', PostsController.index)
 
@@ -25,6 +34,7 @@ root.get('/', PostsController.index)
 root.use('/posts', posts)
 // 👆 Make all posts routes begin with `/posts`
 posts.get('/', PostsController.index)
+posts.use(authenticate)
 posts.post('/', upload.single('photo'), PostsController.create)
 posts.get('/:id', PostsController.show)
 posts.get('/:id/edit', PostsController.edit)
@@ -33,7 +43,7 @@ posts.patch('/:id', upload.single('photo'), PostsController.update)
 
 // Comments Routes
 posts.use('/:postId/comments', comments)
-comments.post('/', CommentsController.create)
+comments.post('/', authenticate, CommentsController.create)
 
 // Users Routes
 root.use('/users', users)
