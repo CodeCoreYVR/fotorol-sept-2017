@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('flash')
+const KnexSessionStore = require('connect-session-knex')(session)
 const kx = require('./db/connection')
 
 // 🛣 ROUTES
@@ -52,14 +53,15 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 // A day (in milliseconds)
   },
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new KnexSessionStore({knex: kx})
 }))
 app.use(flash()) // 👈 Must be add after session middleware (requires it to function)
 // Middleware functions are called in order of appearance in the
 // code. This one happens before our hello world below.
 app.use(async function setCurrentUser (req, res, next) {
   const {userId} = req.session
-  // yo
+
   let user
   req.currentUser = false
   res.locals.currentUser = false // 👈 The `res.locals` object's properties are

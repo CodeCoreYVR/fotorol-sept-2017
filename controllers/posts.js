@@ -2,6 +2,7 @@ const kx = require('../db/connection')
 
 const PostsController = {
   index (req, res, next) {
+    console.log(req.session)
     kx
       .select()
       .from('posts')
