@@ -3,6 +3,7 @@ const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 // 🛣 ROUTES
 const root = require('./routes')
@@ -42,6 +43,15 @@ app.use(morgan('dev'))
 // POST to http://localhost:3000/posts?_method=DELETE
 // 👆 The POST will be overriden with the DELETE method.
 app.use(methodOverride('_method'))
+app.use(session({
+  name: '_fotorol',
+  secret: 'supersecret', // key used to encrypt session
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // A day (in milliseconds)
+  },
+  resave: true,
+  saveUninitialized: false
+}))
 // Middleware functions are called in order of appearance in the
 // code. This one happens before our hello world below.
 /*
