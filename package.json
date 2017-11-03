@@ -7,9 +7,10 @@
     "start": "nodemon",
     "debug": "nodemon --inspect=9229",
     "repl": "nodemon --inspect=9222 repl.js",
-    "db:create": "createdb --echo fotorol_dev",
     "db:drop": "dropdb --echo --if-exists fotorol_dev",
-    "db:migrate": "knex migrate:latest"
+    "db:create": "createdb --echo fotorol_dev",
+    "db:migrate": "knex migrate:latest",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate"
   },
   "repository": {
     "type": "git",

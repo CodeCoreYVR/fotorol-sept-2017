@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+<form class="d-flex flex-column" action="/users" method="POST">
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="username"
+      placeholder="Username"
+      type="text"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="email"
+      placeholder="Email"
+      type="email"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="password"
+      placeholder="Password"
+      type="password"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="confirmPassword"
+      placeholder="Confirm Password"
+      type="password"
+    />
+  </div>
+
+  <input
+    class="btn btn-outline-primary align-self-end"
+    type="submit"
+    value="Sign Up"
+  />
+</form>
+<%- include('../partials/footer') %>
