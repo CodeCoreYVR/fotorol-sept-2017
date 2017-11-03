@@ -4,8 +4,9 @@ const PostsController = {
   index (req, res, next) {
     console.log(req.session)
     kx
-      .select()
+      .select('posts.*', 'users.username as username')
       .from('posts')
+      .innerJoin('users', 'posts.userId', 'users.id')
       .orderBy('created_at', 'DESC')
       .then(posts => res.render('posts/index', {posts}))
   },
@@ -41,7 +42,12 @@ const PostsController = {
     const {id} = req.params
 
     try {
-      const post = await kx.first().from('posts').where({id})
+      const post = await kx
+        .first('posts.*', 'users.username as username')
+        .from('posts')
+        .innerJoin('users', 'posts.userId', 'users.id')
+        .where({'posts.id': id})
+
       const comments = await kx
         .select().from('comments').where({postId: id}).orderBy('created_at', 'DESC')
 
@@ -53,10 +59,10 @@ const PostsController = {
   create (req, res, next) {
     const {content, username} = req.body;
     const {filename} = req.file;
-
+    const {currentUser} = req;
 
     kx
-      .insert({content: content, username: username, photo_path: `/uploads/${filename}` })
+      .insert({content: content, userId: currentUser.id, photo_path: `/uploads/${filename}` })
       .into('posts')
       .then(() => {
         // When setting the type of flash message, try using alert types
