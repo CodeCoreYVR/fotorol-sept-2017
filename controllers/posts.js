@@ -49,7 +49,11 @@ const PostsController = {
         .where({'posts.id': id})
 
       const comments = await kx
-        .select().from('comments').where({postId: id}).orderBy('created_at', 'DESC')
+        .select('comments.*', 'users.username as username')
+        .from('comments')
+        .innerJoin('users', 'comments.userId', 'users.id')
+        .where({postId: id})
+        .orderBy('created_at', 'DESC')
 
       res.render('posts/show', {post, comments})
     } catch (error) {

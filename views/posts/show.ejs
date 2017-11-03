@@ -22,6 +22,7 @@
             <% for (let comment of comments) { %>
               <li class="media">
                 <div class="media-body">
+                  <strong><%= comment.username %>:</strong>
                   <%= comment.content %>
                 </div>
               </li>
